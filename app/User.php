@@ -54,4 +54,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function setPasswordAttribute($value) {
+        $this->attributes['password'] = bcrypt($value); // to bcrypt the value which  i use it in postman
+    }
 }
