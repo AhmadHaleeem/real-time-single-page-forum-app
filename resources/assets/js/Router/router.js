@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+import Login from '../components/login/login'
 const routes = [
     { path: '/login', component: Login }
 ]
@@ -12,7 +13,9 @@ const routes = [
 // You can pass in additional options here, but let's
 // keep it simple for now.
 const router = new VueRouter({
-    routes // short for `routes: routes`
+    routes, // short for `routes: routes`
+    hashbang: false,
+    mode: 'history',
 })
 
 export default router
