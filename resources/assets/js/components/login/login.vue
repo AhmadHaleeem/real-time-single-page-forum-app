@@ -15,12 +15,18 @@
         ></v-text-field>
 
         <v-btn color="green" type="submit" >Login</v-btn>
+            <router-link to="/signup">
+                <v-btn color="blue" type="submit" >Signup</v-btn>
+            </router-link>
     </v-form>
     </v-container>
 </template>
 
 <script>
+
+
     export default {
+        components: {},
         data () {
             return {
                 form: {
@@ -28,6 +34,11 @@
                     password: null,
                 }
             }
+        },
+        created() {
+          if(User.loggedIn()) {
+              this.$router.push({name: 'forum'})
+          }
         },
         methods: {
             login: function () {
