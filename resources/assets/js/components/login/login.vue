@@ -14,16 +14,17 @@
                     required
             ></v-text-field>
 
-            <v-btn color="green" type="submit" >Login</v-btn>
-                <router-link to="/signup">
-                    <v-btn color="blue" type="submit" >Signup</v-btn>
-                </router-link>
+            <v-btn color="green" type="submit" dark>Login</v-btn>
+
+            <router-link to="/signup">
+                <v-btn color="blue" type="submit" dark>Signup</v-btn>
+            </router-link>
+
         </v-form>
     </v-container>
 </template>
 
 <script>
-
 
     export default {
         components: {},
@@ -31,7 +32,7 @@
             return {
                 form: {
                     email: null,
-                    password: null,
+                    password: null
                 }
             }
         },
@@ -40,8 +41,8 @@
               this.$router.push({name: 'forum'})
           }
         },
-        methods: {
-            login: function () {
+        methods:{
+            login(){
                 User.login(this.form)
             }
         }

@@ -7,13 +7,13 @@ class Token{
          return false
     }
 
-    payload(token) {
-        const payload = token.split('.')[1];
+    payload(token){
+        const payload = token.split('.')[1]
         return this.decode(payload)
 
     }
 
-    decode(payload) {
+    decode(payload){
         return JSON.parse(atob(payload))
     }
 

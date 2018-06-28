@@ -17,10 +17,12 @@ Vue.use(Vuetify)
 
 import VueSimplemde from 'vue-simplemde'
 Vue.use(VueSimplemde)
+
 import md from 'marked'
 window.md = md
 
 import User from './helpers/User'
+
 window.User = User
 window.EventBus = new Vue()
 /**
@@ -30,7 +32,9 @@ window.EventBus = new Vue()
  */
 
 Vue.component('AppHome', require('./components/AppHome.vue'));
+
 import router from './Router/router';
+
 const app = new Vue({
     el: '#app',
     router

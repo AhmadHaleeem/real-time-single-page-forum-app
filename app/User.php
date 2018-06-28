@@ -2,12 +2,13 @@
 
 namespace App;
 
-use Tymon\JWTAuth\Contracts\JWTSubject;
+
 use App\Model\Question;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements  JWTSubject
 {
     use Notifiable;
 
@@ -55,7 +56,8 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function setPasswordAttribute($value) {
-        $this->attributes['password'] = bcrypt($value); // to bcrypt the value which  i use it in postman
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
     }
 }
