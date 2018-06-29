@@ -4,13 +4,17 @@
             <v-flex xs12 lg8>
                 <question v-for="question in questions" :key="question.path" :data=question></question>
             </v-flex>
-            Sidebar
+
+            <v-flex>
+                <app-sidebar></app-sidebar>
+            </v-flex>
         </v-layout>
     </v-container>
 </template>
 
 <script>
     import question from './question'
+    import AppSidebar from './AppSidebar.vue'
 
     export default {
         data() {
@@ -18,7 +22,7 @@
                 questions: {}
             }
         },
-        components: {question},
+        components: {question, AppSidebar},
         created() {
             axios.get('/api/question')
                 .then(res => this.questions = res.data.data)

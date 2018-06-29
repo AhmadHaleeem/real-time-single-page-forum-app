@@ -19,7 +19,7 @@
                 items: [
                     { title: 'forum', to: '/forum', show: true},
                     { title: 'Ask Question', to: '/ask', show: User.loggedIn()},
-                    { title: 'Category', to: '/category', show: User.loggedIn()},
+                    { title: 'Category', to: '/category', show: User.admin()},
                     { title: 'login', to: '/login', show: !User.loggedIn()},
                     { title: 'logout', to: '/logout', show: User.loggedIn()},
                 ],
