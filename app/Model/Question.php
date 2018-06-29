@@ -18,6 +18,8 @@ class Question extends Model
     protected $fillable = ['title', 'slug', 'body', 'category_id', 'user_id'];
 //    protected $guarded = [];
 
+    // Fetch all replies data when load question model
+    protected $with = ['replies'];
     public function getRouteKeyName()
     {
         return 'slug';
@@ -28,7 +30,7 @@ class Question extends Model
     }
 
     public function replies() {
-        return $this->hasMany(Reply::class);
+        return $this->hasMany(Reply::class)->latest();
     }
 
     public function category() {
