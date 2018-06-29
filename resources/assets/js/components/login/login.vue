@@ -44,6 +44,7 @@
         methods:{
             login(){
                 User.login(this.form)
+
             }
         }
     }

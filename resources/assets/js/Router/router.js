@@ -13,7 +13,7 @@ import Create from '../components/forum/create'
 const routes = [
     { path: '/login', component: Login },
     { path: '/signup', component: Signup },
-    { path: '/forum', component: Forum, name:'forum' },
+    { path: '/forum', component: Forum, name: 'forum'},
     { path: '/question/:slug', component: Read, name:'read' },
     { path: '/ask', component: Create },
     { path: '/logout', component: Logout },

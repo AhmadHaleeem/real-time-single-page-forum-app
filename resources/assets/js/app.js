@@ -14,7 +14,7 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 
-
+// to include markdown field
 import VueSimplemde from 'vue-simplemde'
 Vue.use(VueSimplemde)
 
@@ -31,7 +31,7 @@ window.EventBus = new Vue()
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('AppHome', require('./components/AppHome.vue'));
+Vue.component('AppHome', require('./components/AppHome.vue'))
 
 import router from './Router/router';
 

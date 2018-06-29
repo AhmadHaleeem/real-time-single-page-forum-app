@@ -14,6 +14,7 @@ class User {
 
         if(Token.isValid(access_token)){
             AppStorage.store(username, access_token)
+            window.location = '/forum'
         }
     }
 
@@ -31,6 +32,7 @@ class User {
 
     logout(){
         AppStorage.clear()
+        window.location = '/login'
     }
 
     name(){
@@ -44,6 +46,10 @@ class User {
             const payload = Token.payload(AppStorage.getToken())
             return payload.sub
         }
+    }
+
+    own(id) {
+        return this.id() == id
     }
 }
 

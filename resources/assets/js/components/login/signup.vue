@@ -1,4 +1,4 @@
-<template>
+dark<template>
     <v-container>
         <v-form @submit.prevent="signup">
             <v-text-field
@@ -32,9 +32,9 @@
                     required
             ></v-text-field>
             <router-link to="/login">
-                <v-btn color="blue" type="submit" >Login</v-btn>
+                <v-btn color="blue" type="submit" dark>Login</v-btn>
             </router-link>
-            <v-btn color="green" type="submit" >Signup</v-btn>
+            <v-btn color="green" type="submit" dark>Signup</v-btn>
         </v-form>
     </v-container>
 </template>
@@ -58,14 +58,14 @@
             }
         },
         methods: {
-            signup: function () {
+            signup() {
+
                 axios.post('/api/auth/signup', this.form)
                     .then(res => {
                         this.responseAfterLogin(res)
                         this.$router.push({ name: 'forum'})
                     })
                     .catch(error => this.errors = error.response.data.errors)
-
             }
         }
     }

@@ -17,9 +17,9 @@
                    autocomplete
            ></v-select>
 
-           <markdown-editor v-model="form.body" r></markdown-editor>
+           <markdown-editor v-model="form.body"></markdown-editor>
 
-           <v-btn color="green" type="submit" >Create</v-btn>
+           <v-btn color="green" type="submit" dark>Create</v-btn>
 
        </v-form>
    </v-container>
@@ -33,7 +33,6 @@
                   title : null,
                   category_id: null,
                   body: null
-
               },
               categories: {},
               errors: {}
@@ -48,7 +47,7 @@
             create() {
                 axios.post('/api/question', this.form)
                     .then(res => this.$router.push(res.data.path))
-                    .catch(error => this.errors = this.response.data.error)
+                    .catch(error => this.errors = error.response.data.error)
             }
         }
     }
