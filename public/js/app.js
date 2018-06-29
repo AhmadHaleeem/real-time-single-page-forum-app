@@ -83600,6 +83600,11 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AppNotification_vue__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AppNotification_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__AppNotification_vue__);
+//
+//
+//
 //
 //
 //
@@ -83615,9 +83620,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: { AppNotification: __WEBPACK_IMPORTED_MODULE_0__AppNotification_vue___default.a },
     data: function data() {
         return {
+            loggedIn: User.loggedIn(),
             items: [{ title: 'forum', to: '/forum', show: true }, { title: 'Ask Question', to: '/ask', show: User.loggedIn() }, { title: 'Category', to: '/category', show: User.admin() }, { title: 'login', to: '/login', show: !User.loggedIn() }, { title: 'logout', to: '/logout', show: User.loggedIn() }]
         };
     },
@@ -83642,6 +83650,8 @@ var render = function() {
       _c("v-toolbar-title", [_vm._v("Haleem")]),
       _vm._v(" "),
       _c("v-spacer"),
+      _vm._v(" "),
+      _vm.loggedIn ? _c("app-notification") : _vm._e(),
       _vm._v(" "),
       _c(
         "div",
@@ -88953,6 +88963,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__editReply_vue__ = __webpack_require__(128);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__editReply_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__editReply_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__likes_like_vue__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__likes_like_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__likes_like_vue__);
 //
 //
 //
@@ -88982,12 +88994,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['data', 'index'],
-    components: { EditReply: __WEBPACK_IMPORTED_MODULE_0__editReply_vue___default.a },
+    components: { EditReply: __WEBPACK_IMPORTED_MODULE_0__editReply_vue___default.a, Like: __WEBPACK_IMPORTED_MODULE_1__likes_like_vue___default.a },
     data: function data() {
         return {
             editing: false
@@ -89038,15 +89054,23 @@ var render = function() {
       _c(
         "v-card",
         [
-          _c("v-card-title", [
-            _c("div", { staticClass: "headline" }, [
-              _vm._v(" " + _vm._s(_vm.data.user) + " ")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "ml-2" }, [
-              _vm._v(" said " + _vm._s(_vm.data.created_at))
-            ])
-          ]),
+          _c(
+            "v-card-title",
+            [
+              _c("div", { staticClass: "headline" }, [
+                _vm._v(" " + _vm._s(_vm.data.user) + " ")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "ml-2" }, [
+                _vm._v(" said " + _vm._s(_vm.data.created_at))
+              ]),
+              _vm._v(" "),
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c("like", { attrs: { content: _vm.data } })
+            ],
+            1
+          ),
           _vm._v(" "),
           _c("v-divider"),
           _vm._v(" "),
@@ -89375,6 +89399,347 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-6bb480f2", module.exports)
+  }
+}
+
+/***/ }),
+/* 131 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(132)
+/* template */
+var __vue_template__ = __webpack_require__(133)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\likes\\like.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-41edfece", Component.options)
+  } else {
+    hotAPI.reload("data-v-41edfece", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 132 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['content'],
+    data: function data() {
+        return {
+            liked: this.content.liked,
+            count: this.content.like_count
+        };
+    },
+
+    computed: {
+        color: function color() {
+            return this.liked ? 'red' : 'red lighten-4';
+        }
+    },
+    methods: {
+        likeIt: function likeIt() {
+            if (User.loggedIn()) {
+                this.liked ? this.decrement() : this.increment();
+                this.liked = !this.liked;
+            }
+        },
+        increment: function increment() {
+            var _this = this;
+
+            axios.post('/api/like/' + this.content.id).then(function (res) {
+                return _this.count++;
+            });
+        },
+        decrement: function decrement() {
+            var _this2 = this;
+
+            axios.delete('/api/like/' + this.content.id).then(function (res) {
+                return _this2.count--;
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 133 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-btn",
+        { attrs: { icon: "" }, on: { click: _vm.likeIt } },
+        [
+          _c("v-icon", { attrs: { color: _vm.color } }, [_vm._v("favorite")]),
+          _vm._v(" " + _vm._s(_vm.count) + "\n    ")
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-41edfece", module.exports)
+  }
+}
+
+/***/ }),
+/* 134 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(135)
+/* template */
+var __vue_template__ = __webpack_require__(136)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\AppNotification.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-02e96d85", Component.options)
+  } else {
+    hotAPI.reload("data-v-02e96d85", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 135 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            read: {},
+            unread: {},
+            unreadCount: 0
+        };
+    },
+    created: function created() {
+        if (User.loggedIn()) {
+            this.getNotifications();
+        }
+    },
+
+    methods: {
+        getNotifications: function getNotifications() {
+            var _this = this;
+
+            axios.post('/api/notifications').then(function (res) {
+                _this.read = res.data.read;
+                _this.unread = res.data.unread;
+                _this.unreadCount = res.data.unread.length;
+            });
+        },
+        readIt: function readIt(notification) {
+            var _this2 = this;
+
+            axios.post('/api/markAsRead', { id: notification.id }).then(function (res) {
+                _this2.unread.splice(notification, 1);
+                _this2.read.push(notification);
+                _this2.unreadCount--;
+            });
+        }
+    },
+    computed: {
+        color: function color() {
+            return this.unreadCount > 0 ? 'red' : 'red lighten-4';
+        }
+    }
+});
+
+/***/ }),
+/* 136 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "text-xs-center" },
+    [
+      _c(
+        "v-menu",
+        { attrs: { "offset-y": "" } },
+        [
+          _c(
+            "v-btn",
+            { attrs: { slot: "activator", icon: "" }, slot: "activator" },
+            [
+              _c("v-icon", { attrs: { color: _vm.color } }, [
+                _vm._v("add_alert")
+              ]),
+              _vm._v(" " + _vm._s(_vm.unreadCount) + "\n        ")
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-list",
+            [
+              _vm._l(_vm.unread, function(item) {
+                return _c(
+                  "v-list-tile",
+                  { key: item.id },
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: item.path } },
+                      [
+                        _c(
+                          "v-list-tile-title",
+                          {
+                            on: {
+                              click: function($event) {
+                                _vm.readIt(item)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(item.question))]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              }),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _vm._l(_vm.read, function(item) {
+                return _c(
+                  "v-list-tile",
+                  { key: item.id },
+                  [_c("v-list-tile-title", [_vm._v(_vm._s(item.question))])],
+                  1
+                )
+              })
+            ],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-02e96d85", module.exports)
   }
 }
 
